@@ -1,0 +1,176 @@
+import React, { useState } from "react";
+import {Card} from "react-native-paper"
+import { View,SafeAreaView, Image, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+
+export default function App() {
+  const userListData = [
+  {
+    id: '1',
+    name: 'John Doe',
+    username: 'johndoe',
+    email: 'john@example.com',
+    image: 'https://dummyimage.com/600x400/ff111f/fff&text=johndoe',
+    likes: 66,
+    isLiked: false
+  },
+  {
+    id: '2',
+    name: 'Jane Smith',
+    username: 'janesmith',
+    email: 'jane@example.com',
+    image: 'https://dummyimage.com/600x400/22f222/fff&text=Jane Smith',
+    likes: 44,
+    isLiked: false
+  },
+  {
+    id: '3',
+    name: 'Bob Johnson',
+    username: 'bobjohnson',
+    email: 'bob@example.com',
+    image: 'https://dummyimage.com/600x400/f333f1f/fff&text=Bob Johnson',
+    likes: 11,
+    isLiked: false
+  },
+    {
+    id: '4',
+    name: 'John Doe',
+    username: 'johndoe',
+    email: 'john@example.com',
+    image: 'https://dummyimage.com/600x400/ff111f/fff&text=johndoe',
+    likes: 66,
+    isLiked: false
+  },
+  {
+    id: '5',
+    name: 'Jane Smith',
+    username: 'janesmith',
+    email: 'jane@example.com',
+    image: 'https://dummyimage.com/600x400/22f222/fff&text=Jane Smith',
+    likes: 44,
+    isLiked: false
+  },
+  {
+    id: '6',
+    name: 'Bob Johnson',
+    username: 'bobjohnson',
+    email: 'bob@example.com',
+    image: 'https://dummyimage.com/600x400/f333f1f/fff&text=Bob Johnson',
+    likes: 11,
+    isLiked: false
+  },
+    {
+    id: '7',
+    name: 'John Doe',
+    username: 'johndoe',
+    email: 'john@example.com',
+    image: 'https://dummyimage.com/600x400/ff111f/fff&text=johndoe',
+    likes: 66,
+    isLiked: false
+  },
+  {
+    id: '8',
+    name: 'Jane Smith',
+    username: 'janesmith',
+    email: 'jane@example.com',
+    image: 'https://dummyimage.com/600x400/22f222/fff&text=Jane Smith',
+    likes: 44,
+    isLiked: false
+  },
+  {
+    id: '9',
+    name: 'Bob Johnson',
+    username: 'bobjohnson',
+    email: 'bob@example.com',
+    image: 'https://dummyimage.com/600x400/f333f1f/fff&text=Bob Johnson',
+    likes: 11,
+    isLiked: false
+  },
+    {
+    id: '10',
+    name: 'John Doe',
+    username: 'johndoe',
+    email: 'john@example.com',
+    image: 'https://dummyimage.com/600x400/ff111f/fff&text=johndoe',
+    likes: 66,
+    isLiked: false
+  },
+  {
+    id: '11',
+    name: 'Jane Smith',
+    username: 'janesmith',
+    email: 'jane@example.com',
+    image: 'https://dummyimage.com/600x400/22f222/fff&text=Jane Smith',
+    likes: 44,
+    isLiked: false
+  },
+  {
+    id: '12',
+    name: 'Bob Johnson',
+    username: 'bobjohnson',
+    email: 'bob@example.com',
+    image: 'https://dummyimage.com/600x400/f333f1f/fff&text=Bob Johnson',
+    likes: 11,
+    isLiked: false
+  },
+];
+  const [data, setData] = useState(userListData);
+
+
+  const handleLike = (itemId) => {
+    setData((prevData) =>
+      prevData.map((item) =>
+        item.id === itemId
+          ? {
+              ...item,
+              likes: item.isLiked ? item.likes - 1 : item.likes + 1,
+              isLiked: !item.isLiked,
+            }
+          : item
+      )
+    );
+  };
+
+  return (
+    <SafeAreaView style={{flex:1}}>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Card style={styles.itemContainer}>
+          <Card style={{padding:4}}>
+          <Image source={{uri: item.image}} style={{width:'100%', height:240, borderRadius:12}}/>
+            <Text style={{paddingHorizontal:6,paddingTop:6, fontSize:18, fontWeight:'600'}}>{item.username}</Text>
+            <Text style={{paddingHorizontal:6,paddingBottom:6, fontSize:12, fontWeight:'600'}}>{item.email}</Text>
+
+            </Card>
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity
+                onPress={() => handleLike(item.id)}
+              >
+                <Text style={{fontSize:30}}>{item.isLiked ? "❤️" : "🤍"}</Text>
+              </TouchableOpacity>
+              <Text>{item.likes}</Text>
+            </View>
+          </Card>
+        )}
+      />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+    elevation:6,
+    borderWidth:1,
+    margin:6
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});
+
