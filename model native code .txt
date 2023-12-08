@@ -1,0 +1,144 @@
+this code is parent component =>
+
+const handlePressShareModel = () => {
+    setShareModelBottomSheet(true);
+    setChatAudioBottomSheet(false);
+  };
+
+ const [shareModelBottomSheet, setShareModelBottomSheet] = useState(false);
+
+
+
+
+ =>
+<View>
+  <TouchableOpacity onPress={handlePressShareModel}>
+    <SvgIcon.AddIcon color={ColorTheme.PRIMARY_BACKGROUND_COLOR_01} />
+  </TouchableOpacity>
+
+  <ShareModelBottomSheet
+    shareModelBottomSheet={shareModelBottomSheet}
+    setShareModelBottomSheet={setShareModelBottomSheet}
+  />
+</View>
+
+============================
+
+
+
+
+
+
+
+
+
+this code is child component =>
+
+=====================
+
+import React, { useState } from 'react';
+import {CustomModal} from '../CustomModal';
+import {Text, TouchableOpacity, View, StyleSheet, Modal, TouchableWithoutFeedback} from 'react-native';
+import SvgIcon from '../../common/SvgIcon';
+import {ColorTheme} from '../../common/AppStyles';
+import {useNavigation} from '@react-navigation/native';
+import {Routes} from '../../routes/Routes';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Foundation from 'react-native-vector-icons/Foundation';
+import Entypo from 'react-native-vector-icons/Entypo';
+
+
+
+
+function ShareModelBottomSheet({
+  shareModelBottomSheet,
+  setShareModelBottomSheet,
+}) {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.centeredView}>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={shareModelBottomSheet}
+      onRequestClose={() => setShareModelBottomSheet(false)}
+    >
+      {/* TouchableWithoutFeedback around the entire screen */}
+      <TouchableWithoutFeedback onPress={() => setShareModelBottomSheet(false)}>
+        <View style={styles.modalOverlay}>
+          {/* Non-touchable View to contain the modal content */}
+          <View style={styles.modalViewTouchable}>
+            {/* TouchableWithoutFeedback inside to prevent the modal from closing when clicking on it */}
+            <TouchableWithoutFeedback>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                {/* Other modal content */}
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </Modal>
+   
+  </View>
+  );
+}
+
+export default ShareModelBottomSheet;
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+   
+    justifyContent: 'flex-end',
+  },
+  modalView: {
+   
+    backgroundColor: "white",
+  
+    padding: 35,
+  
+
+    height: 280,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  // buttonOpen: {
+  //   backgroundColor: "#F194FF",
+  //   borderRadius: 20,
+  //   padding: 10,
+  //   elevation: 2
+  // },
+  // buttonClose: {
+  //   backgroundColor: "#2196F3",
+  //   borderRadius: 20,
+  //   padding: 10,
+  //   elevation: 2
+  // },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    // alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)' // Semi-transparent background
+  }
+});
